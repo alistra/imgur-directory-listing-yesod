@@ -1,0 +1,4 @@
+<h1>Images:
+    <ul>
+        $forall image <- images
+            <li><img src=#{imageUrl image}> 

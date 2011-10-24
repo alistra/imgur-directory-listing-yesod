@@ -1,0 +1,20 @@
+Default: &defaults
+  database: imgur-directory-listing.sqlite3
+  poolsize: 10
+
+Development:
+  <<: *defaults
+
+Test:
+  database: imgur-directory-listing_test.sqlite3
+  <<: *defaults
+
+Staging:
+  database: imgur-directory-listing_staging.sqlite3
+  poolsize: 100
+  <<: *defaults
+
+Production:
+  database: imgur-directory-listing_production.sqlite3
+  poolsize: 100
+  <<: *defaults
