@@ -1,0 +1,15 @@
+h1. imgur-directory-listing-yesod
+
+This is a directory listing app for people with slow upload speeds. Each image in the images directory is uploaded to "imgur.com":imgur.com and then each link on the site redirects users to "imgur.com":http://imgur.com.
+
+h1. How does it work?
+
+It's using hinotify in an another thread, to add and delete images from the database, each time a file is moved in/out, deleted or created in the images directory.
+
+h2. Installation
+
+In the folder:
+
+bc. cabal install
+
+Set the image directory in Application.hs (substitute /images).
