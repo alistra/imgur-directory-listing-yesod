@@ -6,7 +6,6 @@ import qualified Data.Text as T
 import Data.Text.Internal
 import Random
 import Yesod.RssFeed
-import Text.Blaze.Renderer.String (renderHtml)
 import Text.Hamlet (shamlet)
 
 -- This is a handler function for the GET request method on the RootR
@@ -17,11 +16,13 @@ import Text.Hamlet (shamlet)
 -- functions. You can spread them across multiple files if you are so
 -- inclined, or create a single monolithic file.
 getRootR :: Handler RepHtml
-getRootR = getRootNR 0
+getRootR = getRootNR 1
 
 getRootNR :: Integer -> Handler RepHtml
 getRootNR n = do
-    imagesWithIds <- runDB $ selectList ([]::[Filter Image]) [LimitTo 20, OffsetBy (fromEnum $ n*20)]
+    imagesWithIds <- runDB $ selectList [] [Desc ImageTimestamp, LimitTo 20, OffsetBy (fromEnum $ (n-1)*20)]
+    items <- runDB $ count ([] :: [Filter Image])
+    let pages = [1..toInteger $ items `div` 20]
     let images = map snd imagesWithIds
     defaultLayout $ do
         h2id <- lift newIdent
@@ -66,5 +67,5 @@ getRssR = do
         , feedEntryContent = (htmlImage $ imageUrl image )
         }
         htmlImage :: Text -> Html
-        htmlImage imgUrl = toHtml $ renderHtml [shamlet| <img src=#{imgUrl}> |]
+        htmlImage imgUrl = [shamlet| <img src=#{imgUrl}> |]
 

@@ -1,4 +1,7 @@
 <h1>Images:
-    <ul>
-        $forall image <- images
-            <li><img src=#{imageUrl image}> 
+$forall pageNum <- pages
+    <a href=@{RootNR pageNum}>#{pageNum} #
+<ul>
+    $forall image <- images
+        <li><img src=#{imageUrl image} alt=#{imageFilename image}> 
+
