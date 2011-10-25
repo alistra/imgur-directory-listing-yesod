@@ -33,6 +33,7 @@ library
                      Settings.StaticFiles
                      Handler.Root
                      Imgurder
+                     HinotifyHandler
 
     ghc-options:   -Wall -threaded -O0
 
@@ -73,3 +74,4 @@ executable         imgur-directory-listing
                  , hxt-xpath
                  , hxt
                  , curl
+                 , transformers
