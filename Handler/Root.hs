@@ -5,6 +5,9 @@ import Foundation
 import qualified Data.Text as T
 import Data.Text.Internal
 import Random
+import Yesod.RssFeed
+import Text.Blaze.Renderer.String (renderHtml)
+import Text.Hamlet (shamlet)
 
 -- This is a handler function for the GET request method on the RootR
 -- resource pattern. All of your resource patterns are defined in
@@ -42,3 +45,26 @@ getPartialR s = do
             ridx <- liftIO $ randomRIO (0, (length images) - 1)
             let image = images !! ridx
             redirectText RedirectPermanent (imageUrl image)
+
+getRssR :: Handler RepRss
+getRssR = do
+    images@(newest:_)  <- runDB $ selectList [] [Desc ImageTimestamp]
+    rssFeed Feed
+        { feedTitle = "Funny Images"
+        , feedLinkSelf = RssR
+        , feedLinkHome = RootR
+        , feedUpdated = imageTimestamp $ snd newest
+        , feedEntries = map entrify images
+        , feedDescription = "Funny images gathered by alistra"
+        , feedLanguage = "en"
+        }
+    where
+        entrify (iid, image) = FeedEntry {
+          feedEntryLink = ImageR iid
+        , feedEntryUpdated = imageTimestamp image
+        , feedEntryTitle = imageFilename image
+        , feedEntryContent = (htmlImage $ imageUrl image )
+        }
+        htmlImage :: Text -> Html
+        htmlImage imgUrl = toHtml $ renderHtml [shamlet| <img src=#{imgUrl}> |]
+

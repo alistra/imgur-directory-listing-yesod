@@ -51,8 +51,7 @@ withImgurDirectoryListing conf logger f = do
         defaultRunner f h
     where
         -- | Event handler for INotify
-        hinotifyHandler dbconf e = do
-            Database.Persist.Base.withPool (dbconf :: Settings.PersistConfig) $ void . Database.Persist.Base.runPool dbconf (handler e)
+        hinotifyHandler dbconf e = Database.Persist.Base.withPool (dbconf :: Settings.PersistConfig) $ void . Database.Persist.Base.runPool dbconf (handler e)
 
 -- for yesod devel
 withDevelAppPort :: Dynamic

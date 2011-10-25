@@ -75,3 +75,6 @@ executable         imgur-directory-listing
                  , hxt
                  , curl
                  , transformers
+                 , yesod-newsfeed
+                 , time
+                 , blaze-html

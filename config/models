@@ -14,3 +14,4 @@ Image
     smallThumbUrl Text
     deleteUrl Text
     UniqueFilename filename
+    timestamp UTCTime
