@@ -19,7 +19,7 @@ import qualified Text.XML.HXT.XPath.XPathEval as X
 
 
 key :: String
-key = "a05aaffbb595c38c2cd2d54d4c57eb3f"
+key = "27b25626f64a6a77fea07ec3ad2d5250"
 
 
 data ImgurUpload = ImgurUpload {
