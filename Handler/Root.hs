@@ -39,7 +39,7 @@ getImageR n = do
 getPartialR :: Text -> Handler RepHtml
 getPartialR s = do
     imagesWithIds <- runDB $ selectList ([] :: [Filter Image]) []
-    let images = filter (\image -> (s `T.isPrefixOf` imageUrl image)) (map snd imagesWithIds)
+    let images = filter (\image -> (s `T.isPrefixOf` imageFilename image)) (map snd imagesWithIds)
     if length images == 0
         then notFound
         else do
