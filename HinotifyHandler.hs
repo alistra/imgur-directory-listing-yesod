@@ -6,6 +6,7 @@ import System.INotify
 import qualified Data.Text as T
 import Control.Monad.IO.Class(MonadIO)
 import Data.Time
+import System.FilePath.Posix
 
 -- | Registers INotify watchers
 registerHinotify :: Control.Monad.IO.Class.MonadIO m => (Event -> IO ()) -> m ()
@@ -24,7 +25,7 @@ handler _ = return ()
 -- | Add an image to imgur.com and the database
 add ::  PersistBackend b m => String -> b m ()
 add fp = do
-    maybeIU <- liftIO $ upload ("/images/" ++ fp)
+    maybeIU <- liftIO $ upload ("/images/" </> fp)
     case maybeIU of
         Nothing -> return ()
         Just (ImgurUpload _ _ link bthumb sthumb _  dellink) -> do

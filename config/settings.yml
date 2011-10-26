@@ -12,5 +12,5 @@ Staging:
   <<: *defaults
 
 Production:
-  approot: "http://www.example.com"
+  approot: "http://www.alistra.ath.cx"
   <<: *defaults
