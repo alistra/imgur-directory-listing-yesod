@@ -1,5 +1,5 @@
 Default: &defaults
-  host: "localhost"
+  host: "alistra.ath.cx"
   port: 3001
 
 Development:
