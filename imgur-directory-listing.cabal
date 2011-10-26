@@ -78,3 +78,4 @@ executable         imgur-directory-listing
                  , yesod-newsfeed
                  , time
                  , blaze-html
+                 , filepath
