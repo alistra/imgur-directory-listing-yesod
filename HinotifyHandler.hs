@@ -1,7 +1,8 @@
 module HinotifyHandler where
 
 import Foundation
-import Imgurder
+import Network.Imgurder
+import Network.URL
 import System.INotify
 import qualified Data.Text as T
 import Control.Monad.IO.Class(MonadIO)
@@ -22,15 +23,19 @@ handler (Created False fp) = add fp
 handler (Deleted False fp) = del fp
 handler _ = return ()
 
+-- | Imgur API key
+key :: String
+key = "27b25626f64a6a77fea07ec3ad2d5250"
+
 -- | Add an image to imgur.com and the database
 add ::  PersistBackend b m => String -> b m ()
 add fp = do
-    maybeIU <- liftIO $ upload ("/images/" </> fp)
-    case maybeIU of
-        Nothing -> return ()
-        Just (ImgurUpload _ _ link bthumb sthumb _  dellink) -> do
+    eitherIU <- liftIO $ upload key ("/images/" </> fp)
+    case eitherIU of
+        Left _ -> return ()
+        Right (ImgurUpload _ _ link bthumb sthumb _  dellink) -> do
             date <- liftIO getCurrentTime
-            void $ insert $ Image (T.pack fp) (T.pack link) (T.pack bthumb) (T.pack sthumb) (T.pack dellink) date
+            void $ insert $ Image (T.pack fp) (T.pack $ exportURL link) (T.pack $ exportURL bthumb) (T.pack $ exportURL sthumb) (T.pack $ exportURL dellink) date
 
 -- | Remove an image from the database
 del ::  PersistBackend b m => String -> b m ()

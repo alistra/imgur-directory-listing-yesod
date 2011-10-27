@@ -1,6 +1,6 @@
 Default: &defaults
-  host: "alistra.ath.cx"
-  port: 3001
+  host: "localhost"
+  port: 4321
 
 Development:
   <<: *defaults
@@ -12,5 +12,5 @@ Staging:
   <<: *defaults
 
 Production:
-  approot: "http://www.alistra.ath.cx"
+  approot: ""
   <<: *defaults

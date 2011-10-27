@@ -32,7 +32,6 @@ library
                      Settings
                      Settings.StaticFiles
                      Handler.Root
-                     Imgurder
                      HinotifyHandler
 
     ghc-options:   -Wall -threaded -O0
@@ -79,3 +78,5 @@ executable         imgur-directory-listing
                  , time
                  , blaze-html
                  , filepath
+                 , imgurder                     >= 1.2
+                 , url                          >= 2

@@ -137,8 +137,7 @@ instance YesodAuth ImgurDirectoryListing where
         x <- getBy $ UniqueUser $ credsIdent creds
         case x of
             Just (uid, _) -> return $ Just uid
-            Nothing -> do
-                fmap Just $ insert $ User (credsIdent creds) Nothing
+            Nothing -> fmap Just $ insert $ User (credsIdent creds) Nothing
 
     -- You can add other plugins like BrowserID, email or OAuth here
     authPlugins = [authOpenId]
