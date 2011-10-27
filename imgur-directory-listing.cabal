@@ -1,11 +1,11 @@
 name:              imgur-directory-listing
-version:           0.0.0
+version:           0.0.0 
 license:           BSD3
 license-file:      LICENSE
 author:            Aleksander Balicki
-maintainer:        Aleksander Balicki
-synopsis:          The greatest Yesod web application ever.
-description:       I'm sure you can say something clever here if you try.
+maintainer:        balicki.aleksander@gmail.com
+synopsis:          Imgur Directory Listing
+description:       An application for listing images in your directory, but uploading them to http://imgur.com first, so it's not a problem with small upload speeds.
 category:          Web
 stability:         Experimental
 cabal-version:     >= 1.6
@@ -14,11 +14,11 @@ homepage:          http://imgur-directory-listing.yesodweb.com/
 
 Flag production
     Description:   Build the production executable.
-    Default:       False
+    Default:       True
 
 Flag devel
     Description:   Build for use with "yesod devel"
-    Default:       False
+    Default:       True
 
 library
     if flag(devel)
