@@ -14,11 +14,11 @@ homepage:          http://imgur-directory-listing.yesodweb.com/
 
 Flag production
     Description:   Build the production executable.
-    Default:       True
+    Default:       False
 
 Flag devel
     Description:   Build for use with "yesod devel"
-    Default:       True
+    Default:       False
 
 library
     if flag(devel)

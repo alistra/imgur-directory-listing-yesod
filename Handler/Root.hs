@@ -25,7 +25,6 @@ getRootNR n = do
     let pages = [1..toInteger $ items `div` 20]
     let images = map snd imagesWithIds
     defaultLayout $ do
-        h2id <- lift newIdent
         setTitle "Imgur directory listing"
         $(widgetFile "homepage")
 
