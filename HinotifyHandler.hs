@@ -36,6 +36,7 @@ add fp = do
         Right (ImgurUpload _ _ link bthumb sthumb _  dellink) -> do
             date <- liftIO getCurrentTime
             void $ insert $ Image (T.pack fp) (T.pack $ exportURL link) (T.pack $ exportURL bthumb) (T.pack $ exportURL sthumb) (T.pack $ exportURL dellink) date
+        Right (ImgurFailure _)-> return ()
 
 -- | Remove an image from the database
 del ::  PersistBackend b m => String -> b m ()
