@@ -12,4 +12,4 @@ In the folder:
 
 bc. cabal install
 
-Set the image directory in Application.hs (substitute /images).
+Set the image directory (imgdir variable) in the HinotifyHandler.hs file.

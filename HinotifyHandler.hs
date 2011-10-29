@@ -13,7 +13,7 @@ import System.FilePath.Posix
 registerHinotify :: Control.Monad.IO.Class.MonadIO m => (Event -> IO ()) -> m ()
 registerHinotify h = do
     inotify <- liftIO initINotify
-    void $ liftIO $ addWatch inotify [MoveIn, MoveOut, Create, Delete] "/images" h
+    void $ liftIO $ addWatch inotify [MoveIn, MoveOut, Create, Delete] imgdir h
 
 -- | Handler in a PersistBackend monad
 handler :: PersistBackend b m => Event -> b m ()
@@ -27,10 +27,14 @@ handler _ = return ()
 key :: String
 key = "27b25626f64a6a77fea07ec3ad2d5250"
 
+-- | Image directory
+imgdir :: FilePath
+imgdir = "/images"
+
 -- | Add an image to imgur.com and the database
 add ::  PersistBackend b m => String -> b m ()
 add fp = do
-    eitherIU <- liftIO $ upload key ("/images/" </> fp)
+    eitherIU <- liftIO $ upload key (imgdir </> fp)
     case eitherIU of
         Left _ -> return ()
         Right (ImgurUpload _ _ link bthumb sthumb _  dellink) -> do
