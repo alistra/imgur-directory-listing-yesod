@@ -10,6 +10,6 @@ h2. Installation
 
 In the folder:
 
-bc. cabal install
+bc. cabal update && cabal-dev -fproduction install
 
 Set the image directory (imgdir variable) in the HinotifyHandler.hs file.
